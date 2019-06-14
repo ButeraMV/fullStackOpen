@@ -19,14 +19,22 @@ const App = () => {
             name: newName,
         }
 
-        setPersons(persons.concat(personObject))
-        setNewName('')
+        if (persons.findIndex(person => person.name === newName) === -1) {
+            setPersons(persons.concat(personObject))
+            setNewName('')
+            clearForm()
+        } else {
+            alert(`${newName} is already added to the phonebook`)
+            clearForm()
+        }
     }
+    
+    const clearForm = () => document.getElementById('addToPhonebookForm').reset()
 
     return (
         <div>
             <h2>Phonebook</h2>
-            <form onSubmit={addPerson}>
+            <form onSubmit={addPerson} id="addToPhonebookForm">
                 <div>
                     name: <input onChange={handleNameInputChange} />
                 </div>
