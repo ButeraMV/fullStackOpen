@@ -1,59 +1,26 @@
 import React, { useState } from 'react'
-import Person from './components/Person'
+import Persons from './components/Persons'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '555-555-5555' }
+    { name: 'Arto Hellas', number: '040-123456' },
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ])
-  const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-
-  const rows = () => persons.map(person => <Person key={person.name} person={person} />)
-
-  const handleNameInputChange = (e) => {
-    setNewName(e.target.value)
-  }
-
-  const handleNumberInputChange = (e) => {
-    setNewNumber(e.target.value)
-  }
-
-  const addPerson = (e) => {
-    e.preventDefault()
-    const personObject = {
-      name: newName,
-      number: newNumber,
-    }
-
-    if (persons.findIndex(person => person.name === newName) === -1) {
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
-      clearForm()
-    } else {
-      alert(`${newName} is already added to the phonebook`)
-      clearForm()
-    }
-  }
-
-  const clearForm = () => document.getElementById('addToPhonebookForm').reset()
+  
+  const [filter, setFilter] = useState('')
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addPerson} id="addToPhonebookForm">
-        <div>
-          name: <input onChange={handleNameInputChange} />
-        </div>
-        <div>
-          number: <input onChange={handleNumberInputChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Filter filter={filter} setFilter={setFilter} />
+      <h2>Add new</h2>
+      <PersonForm persons={persons} setPersons={setPersons} />
       <h2>Numbers</h2>
-      {rows()}
+      <Persons persons={persons} filter={filter} />
     </div>
   )
 }
