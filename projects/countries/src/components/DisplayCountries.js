@@ -10,7 +10,7 @@ const DisplayCountries = ({ countries, filter, buttonHandler}) => {
   }
 
   if (countriesToDisplay.length < 1 || !filter) {
-    return(<p>Please start typing to find a country</p>)
+    return(<p></p>)
   }
 
   if (countriesToDisplay.length === 1) {
