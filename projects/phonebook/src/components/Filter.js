@@ -1,12 +1,8 @@
 import React from 'react';
 
-const Filter = ({ filter, setFilter }) => {
-  const handleFilterInputChange = (e) => {
-    setFilter(e.target.value)
-  }
-
+const Filter = ({ filter, changeEvent }) => {
   return (
-    <p>filter shown with <input onChange={handleFilterInputChange} /></p>
+    <p>filter shown with <input onChange={changeEvent} /></p>
   )
 }
 
